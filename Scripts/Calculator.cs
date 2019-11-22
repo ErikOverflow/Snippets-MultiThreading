@@ -7,33 +7,23 @@ namespace ErikOverflow.Classic
 {
     public class Calculator
     {
-        public void CalculateDistance(List<GameObject> planets)
+        public GameObject FindClosestObject(List<GameObject> objs, Transform baseObject)
         {
-            float overallMin = float.infinity;
-            float overallMax = 0f;
-            //Go through each planet and find the shortest and longest distance between all other planets
-            foreach(GameObject planet in planets)
+            float shortestDistance = float.infinity;
+            GameObject closestObject;
+            //Iterate through all gameObjects, checking the distance to the baseObject
+            foreach(GameObject go in objs)
             {
-                float planetMin = float.infinity;
-                float planetMax = 0f;
-                Vector3 planetPos = planet.transform.position;
-                //Find the shortest and longest distance between the current planet and all other planets
-                foreach(GameObject otherPlanet in planets)
+                Vector3 goPos = go.transform.position;
+                
+                float distance = Vector3.distance(otherPos, goPos);
+                if(distance < shortestDistance)
                 {
-                    if(otherPlanet == planet)
-                        continue;
-                    Vector3 otherPos = otherPlanet.transform.position;
-                    float distance = Vector3.distance(otherPos, planetPos);
-                    if(distance < planetMin)
-                        planetMin = distance;
-                    if(distance > planetMax)
-                        planetMax = distance;
+                    shortestDistance = distance;
+                    closestObject = go;
                 }
-                if(planetMin < overallMin)
-                    overallMin = planetMin;
-                if(planetMax > overallMax)
-                    overallMax = planetMax;
             }
+            return closestObject;
         }
     }
 }
