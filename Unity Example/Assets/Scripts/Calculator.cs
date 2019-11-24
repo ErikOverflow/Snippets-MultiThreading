@@ -9,14 +9,15 @@ namespace ErikOverflow.Classic
     {
         public GameObject FindClosestObject(List<GameObject> objs, Transform baseObject)
         {
-            float shortestDistance = float.infinity;
-            GameObject closestObject;
+            float shortestDistance = float.PositiveInfinity;
+            GameObject closestObject = null;
+            Vector3 baseObjPos = baseObject.position;
             //Iterate through all gameObjects, checking the distance to the baseObject
             foreach(GameObject go in objs)
             {
                 Vector3 goPos = go.transform.position;
                 
-                float distance = Vector3.distance(otherPos, goPos);
+                float distance = Vector3.Distance(baseObjPos, goPos);
                 if(distance < shortestDistance)
                 {
                     shortestDistance = distance;

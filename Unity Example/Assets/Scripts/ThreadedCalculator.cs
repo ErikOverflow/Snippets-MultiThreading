@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ErikOverflow.Threaded
 {
-    public class Calculator
+    public class ThreadedCalculator
     {
         struct ObjData
         {
@@ -14,23 +14,24 @@ namespace ErikOverflow.Threaded
             
             public ObjData(GameObject _gameObject, Vector3 _position)
             {
-                gameObejct = _gameObject;
+                gameObject = _gameObject;
                 position = _position;
             }
         }
         
         public GameObject FindClosestObject(List<GameObject> objs, Transform baseObject)
         {
-            float shortestDistance = float.infinity;
-            GameObject closestObject;
+            float shortestDistance = float.PositiveInfinity;
+            GameObject closestObject = null;
             //Iterate through all gameObjects, assigning to a Vector3[] variable
             ConcurrentQueue<ObjData> objDataQueue = new ConcurrentQueue<ObjData>();
             foreach(GameObject obj in objs)
             {
                 objDataQueue.Enqueue(new ObjData(obj, obj.transform.position));
             }
-            
+
             //Start thread here
+            return closestObject;
         }
     }
 }
